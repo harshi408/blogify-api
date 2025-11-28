@@ -1,13 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const postsController = require("../controllers/posts.controller");
 
-const posts = [
-  { id: 1, title: "First Post", content: "Hello from Blogify!" }
-];
-
-// GET /api/v1/posts
-router.get("/", (req, res) => {
-  res.json(posts);
-});
+router.get("/", postsController.getAllPosts);
+router.get("/:id", postsController.getPostById);
+router.post("/", postsController.createPost);
 
 module.exports = router;
