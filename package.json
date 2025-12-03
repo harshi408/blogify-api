@@ -1,15 +1,15 @@
 {
   "name": "blogify-api",
   "version": "1.0.0",
-<<<<<<< HEAD
-  "description": "",
-  "main": "index.js",
+  "description": "The foundational backend setup for the Blogify API project.",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Your Name",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
@@ -17,18 +17,5 @@
   },
   "dependencies": {
     "express": "^5.1.0"
-=======
-  "description": "The foundational backend setup for the Blogify API project.",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
-  },
-  "keywords": [],
-  "author": "Your Name",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^3.1.0"
->>>>>>> edb47c1a38d755a00303b8187b9a70f13ee313df
   }
 }

@@ -1,25 +1,20 @@
-const postService = require("../services/posts.service");
+// src/controllers/posts.controller.js
 
-exports.getAllPosts = (req, res) => {
-  res.status(200).json(postService.findAllPosts());
+const getAllPosts = (req, res) => {
+  res.json({
+    message: "All posts will be fetched from here"
+  });
 };
 
-exports.getPostById = (req, res) => {
-  const id = Number(req.params.id);
-  const post = postService.findPostById(id);
+const getPostById = (req, res) => {
+  const postId = req.params.postId;
 
-  if (!post) return res.status(404).json({ message: "Post not found" });
-
-  res.status(200).json(post);
+  res.status(200).json({
+    message: `Fetching data for post with ID: ${postId}`
+  });
 };
 
-exports.createPost = (req, res) => {
-  const { title, content } = req.body;
-
-  if (!title || !content) {
-    return res.status(400).json({ message: "Title and content are required" });
-  }
-
-  const newPost = postService.addPost(title, content);
-  res.status(201).json(newPost);
+module.exports = {
+  getAllPosts,
+  getPostById,
 };
