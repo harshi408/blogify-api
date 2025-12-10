@@ -1,20 +1,55 @@
 // src/controllers/posts.controller.js
 
-const getAllPosts = (req, res) => {
-  res.json({
-    message: "All posts will be fetched from here"
-  });
+import Post from "../models/posts.model.js";
+
+// ===============================
+// GET ALL POSTS
+// ===============================
+export const getAllPosts = async (req, res) => {
+  try {
+    const posts = await Post.find();
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        posts: posts,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
 };
 
-const getPostById = (req, res) => {
-  const postId = req.params.postId;
+// ===============================
+// GET POST BY ID
+// ===============================
+export const getPostById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findById(id);
 
-  res.status(200).json({
-    message: `Fetching data for post with ID: ${postId}`
-  });
-};
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
 
-module.exports = {
-  getAllPosts,
-  getPostById,
+    return res.status(200).json({
+      success: true,
+      data: {
+        post: post,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
 };
