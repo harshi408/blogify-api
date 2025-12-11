@@ -1,3 +1,13 @@
+export async function getAllPosts(req, res) {
+  // TODO: replace with real database query
+  res.json({ posts: [] });
+}
+
+export async function getPostById(req, res) {
+  const { postId } = req.params;
+  // TODO: replace with real database query
+  res.json({ post: { id: postId, title: 'Sample post', content: '...' } });
+}
 // src/controllers/posts.controller.js
 
 import Post from "../models/posts.model.js";
