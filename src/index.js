@@ -1,12 +1,17 @@
-import http from 'http';
+import express from "express";
+import cookieParser from "cookie-parser";
 
-const PORT = 3000;
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Blogify API is running!');
-});
+import postRoutes from "./routes/posts.routes.js";
+import { login } from "./controllers/auth.controller.js";
 
-server.listen(PORT, () => {
-  console.log(`🚀 Server started on http://localhost:${PORT}`);
+const app = express();
+
+app.use(express.json());
+app.use(cookieParser());
+
+app.post("/api/auth/login", login);
+app.use("/api/posts", postRoutes);
+
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
 });

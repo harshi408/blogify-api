@@ -1,8 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const postController = require("../controllers/posts.controller");
+export const users = [
+  { id: "1", email: "userA@test.com", password: "123456" },
+  { id: "2", email: "userB@test.com", password: "123456" }
+];
 
-router.get("/", postController.getAllPosts);
-router.get("/:postId", postController.getPostById);
-
-module.exports = router;
+export const posts = [
+  { id: "101", title: "Post by User A", owner: "1" },
+  { id: "102", title: "Post by User B", owner: "2" }
+];

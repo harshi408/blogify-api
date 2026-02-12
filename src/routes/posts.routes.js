@@ -1,9 +1,10 @@
-import express from 'express';
-import postController from '../controllers/posts.controller.js';
+import express from "express";
+import { deletePost } from "../controllers/posts.controller.js";
+import protect from "../auth.middleware.js";
 
 const router = express.Router();
 
-router.get('/', postController.getAllPosts);
-router.get('/:postId', postController.getPostById);
+router.delete("/:id", protect, deletePost);
 
 export default router;
+        
