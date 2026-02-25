@@ -12,15 +12,20 @@ export const login = (req, res) => {
     return res.status(401).json({ message: "Invalid credentials" });
   }
 
+  // Use environment variable for secret (important for production)
   const token = jwt.sign(
     { id: user.id },
-    "supersecretkey",
+    process.env.JWT_SECRET || "supersecretkey",
     { expiresIn: "1h" }
   );
 
   res.cookie("token", token, {
-    httpOnly: true
+    httpOnly: true,
+    secure: false // keep false for now (Render free plan works fine)
   });
 
-  res.status(200).json({ message: "Login successful" });
-};
+  return res.status(200).json({
+    message: "Login successful",
+    token
+  });
+};   

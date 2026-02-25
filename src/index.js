@@ -9,9 +9,20 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+// Root route for browser test
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+// Auth route
 app.post("/api/auth/login", login);
+
+// Posts route
 app.use("/api/posts", postRoutes);
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+// IMPORTANT: for Render
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
