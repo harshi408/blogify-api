@@ -1,65 +1,21 @@
-export async function getAllPosts(req, res) {
-  // TODO: replace with real database query
-  res.json({ posts: [] });
-}
+import { posts } from "../models/posts.model.js";
 
-export async function getPostById(req, res) {
-  const { postId } = req.params;
-  // TODO: replace with real database query
-  res.json({ post: { id: postId, title: 'Sample post', content: '...' } });
-}
-// src/controllers/posts.controller.js
+export const deletePost = (req, res) => {
+  const postId = req.params.id;
+  const post = posts.find((p) => p.id === postId);
 
-import Post from "../models/posts.model.js";
+  if (!post) {
+    return res.status(404).json({ message: "Post not found" });
+  }
 
-// ===============================
-// GET ALL POSTS
-// ===============================
-export const getAllPosts = async (req, res) => {
-  try {
-    const posts = await Post.find();
-
-    return res.status(200).json({
-      success: true,
-      data: {
-        posts: posts,
-      },
-    });
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
+  // 🔒 Authorization check
+  if (post.owner !== req.user.id) {
+    return res.status(403).json({
+      message: "Not authorized to delete this post"
     });
   }
-};
 
-// ===============================
-// GET POST BY ID
-// ===============================
-export const getPostById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const post = await Post.findById(id);
-
-    if (!post) {
-      return res.status(404).json({
-        success: false,
-        message: "Post not found",
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: {
-        post: post,
-      },
-    });
-  } catch (error) {
-    console.error("Error fetching post:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-    });
-  }
+  res.status(200).json({
+    message: "Post deleted successfully"
+  });
 };

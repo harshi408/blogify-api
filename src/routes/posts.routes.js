@@ -1,9 +1,12 @@
-import express from 'express';
-import postController from '../controllers/posts.controller.js';
+import express from "express";
 
 const router = express.Router();
 
-router.get('/', postController.getAllPosts);
-router.get('/:postId', postController.getPostById);
+router.get("/", (req, res) => {
+  res.json([
+    { title: "First Post" },
+    { title: "Second Post" }
+  ]);
+});
 
 export default router;

@@ -1,17 +1,21 @@
 {
   "name": "blogify-api",
   "version": "1.0.0",
-  "description": "The foundational backend setup for the Blogify API project.",
+  "description": "Blogify API Production Deployment",
   "main": "src/index.js",
   "type": "module",
+
+  "engines": {
+    "node": ">=18.0.0"
+  },
+
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node src/index.js"
   },
+
   "dependencies": {
-    "express": "^5.2.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.11"
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
   }
 }
